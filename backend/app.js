@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const indexRouter = require('./routes/indexRouter')
-const postRouter = require('./routes/postRouter')
+const postsRouter = require('./routes/postsRouter')
 const passport = require('passport')
 const isAuth = require('./auth/isAuth')
 const authorRouter = require('./routes/authorRouter')
@@ -15,7 +15,7 @@ app.use(passport.initialize())
 
 app.use('/users', isAuth, usersRouter)
 app.use('/author', isAuth, authorRouter)
-app.use('/posts', postRouter)
+app.use('/posts', postsRouter)
 app.use('/', indexRouter)
 
 app.use((err, req, res, next) => {
