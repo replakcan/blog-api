@@ -19,4 +19,6 @@ postsRouter
 
 postsRouter.patch('/:postId/publish', postsController.postsPublishById)
 
+postsRouter.get('/', postsController.postsFindMany)
+
 module.exports = postsRouter
