@@ -4,7 +4,7 @@ const postsController = require('../controllers/postsController')
 const isAuth = require('../auth/isAuth')
 const { isAuthor } = require('./isAuthorMiddleware')
 
-postsRouter.get('/', postsController.postsFindMany)
+postsRouter.param('postId', postsController.attachPostToRequestObj)
 
 postsRouter
   .route('/:postId')

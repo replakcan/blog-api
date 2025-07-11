@@ -1,5 +1,20 @@
 const prisma = require('../lib/prisma')
 
+exports.attachPostToRequestObj = async (req, res, next) => {
+  const { postId } = req.params
+
+  try {
+    const post = await prisma.post.findUniqueOrThrow({
+      where: { id: postId },
+    })
+
+    req.post = post
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
 exports.postsFindMany = async (req, res, next) => {
   try {
     const posts = await prisma.post.findMany({
@@ -8,119 +23,94 @@ exports.postsFindMany = async (req, res, next) => {
 
     res.json(posts)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.postsFindById = async (req, res, next) => {
-  const { postId } = req.params
+  const { post } = req
 
   try {
-    const post = await prisma.post.findUniqueOrThrow({
-      where: { id: postId },
-    })
-
     res.json(post)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.findManyCommentsByPostId = async (req, res, next) => {
-  const { postId } = req.params
+  const { post } = req
 
   try {
-    const post = await prisma.post.findUniqueOrThrow({
-      where: { id: postId },
-      include: { comments: true },
-    })
-
     const comments = post.comments
 
     res.json(comments)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.postsUpdateById = async (req, res, next) => {
-  const { postId } = req.params
-  const { user } = req
+  const { post, user } = req
   const { title, text } = req.body
 
   try {
-    const post = await prisma.post.findUniqueOrThrow({
-      where: { id: postId },
-    })
-
     if (post.userId != user.id) return res.status(403).send({ message: 'You are not the author of this post' })
 
     const updatedPost = await prisma.post.update({
-      where: { id: postId },
+      where: { id: post.id },
       data: { title, text, userId: user.id },
     })
 
     res.json(updatedPost)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.postsDeleteById = async (req, res, next) => {
-  const { postId } = req.params
-  const { user } = req
+  const { user, post } = req
 
   try {
-    const post = await prisma.post.findUniqueOrThrow({
-      where: { id: postId },
-    })
-
     if (post.userId != user.id) return res.status(403).send({ message: 'You are not the author of this post' })
 
     await prisma.post.delete({
-      where: { id: postId },
+      where: { id: post.id },
     })
 
-    res.json({ message: `post with id ${postId} is deleted.` })
+    res.json({ message: `post with id ${post.id} is deleted.` })
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.createCommentByPostId = async (req, res, next) => {
-  const { user } = req
+  const { user, post } = req
   const { text } = req.body
-  const { postId } = req.params
 
   try {
     const newComment = await prisma.comment.create({
-      data: { text, postId, userId: user.id },
+      data: { text, postId: post.id, userId: user.id },
     })
 
     res.json(newComment)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.postsPublishById = async (req, res, next) => {
-  const { postId } = req.params
-  const { user } = req
+  const { user, post } = req
 
   try {
-    const post = await prisma.post.findUniqueOrThrow({
-      where: { id: postId },
-    })
-
     if (post.userId != user.id) return res.status(403).send({ message: 'forbidden' })
 
     const patchedPost = await prisma.post.update({
-      where: { id: postId },
+      where: { id: post.id },
       data: { published: true },
     })
 
     res.json(patchedPost)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
