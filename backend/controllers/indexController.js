@@ -1,5 +1,5 @@
-const generateToken = require("../auth/generateToken")
-const prisma = require("../lib/prisma")
+const generateToken = require('../auth/generateToken')
+const prisma = require('../lib/prisma')
 const bcrypt = require('bcryptjs')
 
 exports.usersLoginPost = async (req, res, next) => {
@@ -51,4 +51,14 @@ exports.usersRegisterPost = async (req, res, next) => {
 
 exports.usersSecretGet = (req, res) => {
   res.json({ message: `Hello ${req.user.username}, you made it to the secret dungeon!` })
+}
+
+exports.usersFindMany = async (req, res, next) => {
+  try {
+    const users = await prisma.user.findMany()
+
+    res.json(users)
+  } catch (error) {
+    return next(error)
+  }
 }
