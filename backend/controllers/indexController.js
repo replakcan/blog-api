@@ -55,7 +55,18 @@ exports.usersSecretGet = (req, res) => {
 
 exports.usersFindMany = async (req, res, next) => {
   try {
-    const users = await prisma.user.findMany()
+    const users = await prisma.user.findMany({
+      omit: {
+        first_name: true,
+        last_name: true,
+        email: true,
+        age: true,
+        password: true,
+      },
+      include: {
+        posts: true,
+      },
+    })
 
     res.json(users)
   } catch (error) {
