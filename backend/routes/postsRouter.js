@@ -13,5 +13,6 @@ postsRouter
   .delete(isAuth, isAuthor, postsController.postsDeleteById)
 
 postsRouter.get('/:postId/comments', postsController.findManyCommentsByPostId)
+postsRouter.patch('/:postId/publish', postsController.postsPublishById)
 
 module.exports = postsRouter

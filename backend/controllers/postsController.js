@@ -100,3 +100,24 @@ exports.postsDeleteById = async (req, res, next) => {
     return next(error)
   }
 }
+exports.postsPublishById = async (req, res, next) => {
+  const { postId } = req.params
+  const { user } = req
+
+  try {
+    const post = await prisma.post.findUniqueOrThrow({
+      where: { id: postId },
+    })
+
+    if (post.userId != user.id) return res.status(403).send({ message: 'forbidden' })
+
+    const patchedPost = await prisma.post.update({
+      where: { id: postId },
+      data: { published: true },
+    })
+
+    res.json(patchedPost)
+  } catch (error) {
+    return next(error)
+  }
+}
