@@ -1,9 +1,13 @@
 const express = require('express')
 const app = express()
 const indexRouter = require('./routes/indexRouter')
+const passport = require('passport')
+require('./auth/jwtStrategy')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(passport.initialize())
 
 app.use('/', indexRouter)
 
