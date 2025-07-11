@@ -100,6 +100,23 @@ exports.postsDeleteById = async (req, res, next) => {
     return next(error)
   }
 }
+
+exports.createCommentByPostId = async (req, res, next) => {
+  const { user } = req
+  const { text } = req.body
+  const { postId } = req.params
+
+  try {
+    const newComment = await prisma.comment.create({
+      data: { text, postId, userId: user.id },
+    })
+
+    res.json(newComment)
+  } catch (error) {
+    return next(error)
+  }
+}
+
 exports.postsPublishById = async (req, res, next) => {
   const { postId } = req.params
   const { user } = req
