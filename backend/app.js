@@ -1,3 +1,5 @@
+require('dotenv').config()
+require('./auth/jwtStrategy')
 const express = require('express')
 const app = express()
 const indexRouter = require('./routes/indexRouter')
@@ -6,7 +8,6 @@ const passport = require('passport')
 const isAuth = require('./auth/isAuth')
 const authorRouter = require('./routes/authorRouter')
 const usersRouter = require('./routes/usersRouter')
-require('./auth/jwtStrategy')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
