@@ -1,7 +1,8 @@
 const prisma = require('../lib/prisma')
 
-exports.commentsFindById = async (req, res, next) => {
+exports.attachCommentToRequestObj = async (req, res, next) => {
   const { commentId } = req.params
+
   try {
     const comment = await prisma.comment.findUniqueOrThrow({
       where: {
@@ -9,28 +10,32 @@ exports.commentsFindById = async (req, res, next) => {
       },
     })
 
+    req.comment = comment
+
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.commentsFindById = async (req, res, next) => {
+  const { comment } = req
+  try {
     res.json(comment)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.commentsUpdateById = async (req, res, next) => {
-  const { commentId } = req.params
   const { text } = req.body
-  const { user } = req
+  const { user, comment } = req
   try {
-    const comment = await prisma.comment.findUniqueOrThrow({
-      where: {
-        id: commentId,
-      },
-    })
-
     if (comment.userId != user.id) return res.status(403).send({ message: 'You are not the author of this comment' })
 
     const updatedComment = await prisma.comment.update({
       where: {
-        id: commentId,
+        id: comment.id,
       },
       data: {
         text,
@@ -39,28 +44,21 @@ exports.commentsUpdateById = async (req, res, next) => {
 
     res.json(updatedComment)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
 exports.commentsDeleteById = async (req, res, next) => {
-  const { user } = req
-  const { commentId } = req.params
+  const { user, comment } = req
   try {
-    const comment = await prisma.comment.findUniqueOrThrow({
-      where: {
-        id: commentId,
-      },
-    })
-
     if (comment.userId != user.id) return res.status(403).send({ message: 'You are not the author of this comment' })
 
     await prisma.comment.delete({
       where: {
-        id: commentId,
+        id: comment.id,
       },
     })
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }

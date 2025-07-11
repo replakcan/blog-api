@@ -2,6 +2,8 @@ const { Router } = require('express')
 const commentsRouter = Router()
 const commentsController = require('../controllers/commentsController')
 
+commentsRouter.param('commentId', commentsController.attachCommentToRequestObj)
+
 commentsRouter
   .route('/:commentId')
   .get(commentsController.commentsFindById)
