@@ -1,4 +1,5 @@
 const generateToken = require('../auth/generateToken')
+const { UnauthorizedError } = require('../errors/customError')
 const prisma = require('../lib/prisma')
 const bcrypt = require('bcryptjs')
 
@@ -12,11 +13,11 @@ exports.usersLoginPost = async (req, res, next) => {
       },
     })
 
-    if (!user) return res.status(401).json({ message: 'Invalid username' })
+    if (!user) throw new UnauthorizedError('Invalid credentials')
 
     const match = await bcrypt.compare(password, user.password)
 
-    if (!match) return res.status(401).json({ message: 'Invalid password' })
+    if (!match) throw new UnauthorizedError('Invalid credentials')
 
     const token = generateToken(user)
 
