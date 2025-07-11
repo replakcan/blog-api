@@ -3,9 +3,7 @@ const prisma = require('../lib/prisma')
 exports.postsFindMany = async (req, res, next) => {
   try {
     const posts = await prisma.post.findMany({
-      include: {
-        comments: true,
-      },
+      include: { comments: true },
     })
 
     res.json(posts)
@@ -19,9 +17,7 @@ exports.postsFindById = async (req, res, next) => {
 
   try {
     const post = await prisma.post.findUniqueOrThrow({
-      where: {
-        id: postId,
-      },
+      where: { id: postId },
     })
 
     res.json(post)
@@ -35,12 +31,8 @@ exports.findManyCommentsByPostId = async (req, res, next) => {
 
   try {
     const post = await prisma.post.findUniqueOrThrow({
-      where: {
-        id: postId,
-      },
-      include: {
-        comments: true,
-      },
+      where: { id: postId },
+      include: { comments: true },
     })
 
     const comments = post.comments
@@ -64,14 +56,8 @@ exports.postsUpdateById = async (req, res, next) => {
     if (post.userId != user.id) return res.status(403).send({ message: 'You are not the author of this post' })
 
     const updatedPost = await prisma.post.update({
-      where: {
-        id: postId,
-      },
-      data: {
-        title,
-        text,
-        userId: user.id,
-      },
+      where: { id: postId },
+      data: { title, text, userId: user.id },
     })
 
     res.json(updatedPost)
