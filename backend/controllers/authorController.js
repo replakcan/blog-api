@@ -1,3 +1,4 @@
+const { NotFoundError } = require('../errors/customError')
 const prisma = require('../lib/prisma')
 
 exports.authorProfileGet = async (req, res, next) => {
@@ -31,7 +32,7 @@ exports.authorPostsPost = async (req, res, next) => {
       },
     })
 
-    if (!user) return res.status(404).send({ message: 'User not found' })
+    if (!user) throw new NotFoundError('Author not found')
 
     res.json(newPost)
   } catch (error) {

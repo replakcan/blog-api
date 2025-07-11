@@ -1,3 +1,4 @@
+const { ForbiddenError } = require('../errors/customError')
 const prisma = require('../lib/prisma')
 
 exports.attachCommentToRequestObj = async (req, res, next) => {
@@ -31,7 +32,7 @@ exports.commentsUpdateById = async (req, res, next) => {
   const { text } = req.body
   const { user, comment } = req
   try {
-    if (comment.userId != user.id) return res.status(403).send({ message: 'You are not the author of this comment' })
+    if (comment.userId != user.id) throw new ForbiddenError('You are not allowed to edit this comment')
 
     const updatedComment = await prisma.comment.update({
       where: {
@@ -51,7 +52,7 @@ exports.commentsUpdateById = async (req, res, next) => {
 exports.commentsDeleteById = async (req, res, next) => {
   const { user, comment } = req
   try {
-    if (comment.userId != user.id) return res.status(403).send({ message: 'You are not the author of this comment' })
+    if (comment.userId != user.id) throw new ForbiddenError('You are not allowed to delete this comment')
 
     await prisma.comment.delete({
       where: {

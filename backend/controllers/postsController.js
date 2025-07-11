@@ -1,3 +1,4 @@
+const { ForbiddenError } = require('../errors/customError')
 const prisma = require('../lib/prisma')
 
 exports.attachPostToRequestObj = async (req, res, next) => {
@@ -54,7 +55,7 @@ exports.postsUpdateById = async (req, res, next) => {
   const { title, text } = req.body
 
   try {
-    if (post.userId != user.id) return res.status(403).send({ message: 'You are not the author of this post' })
+    if (post.userId != user.id) throw new ForbiddenError('You are not allowed to edit this post')
 
     const updatedPost = await prisma.post.update({
       where: { id: post.id },
@@ -71,7 +72,7 @@ exports.postsDeleteById = async (req, res, next) => {
   const { user, post } = req
 
   try {
-    if (post.userId != user.id) return res.status(403).send({ message: 'You are not the author of this post' })
+    if (post.userId != user.id) throw new ForbiddenError('You are not allowed to delete this post')
 
     await prisma.post.delete({
       where: { id: post.id },
@@ -102,7 +103,7 @@ exports.postsPublishById = async (req, res, next) => {
   const { user, post } = req
 
   try {
-    if (post.userId != user.id) return res.status(403).send({ message: 'forbidden' })
+    if (post.userId != user.id) throw new ForbiddenError('You are not allowed to publish this post')
 
     const patchedPost = await prisma.post.update({
       where: { id: post.id },
