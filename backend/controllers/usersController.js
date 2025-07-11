@@ -15,6 +15,6 @@ exports.giveUserAuthorship = async (req, res, next) => {
 
     res.json({ message: 'You are an author now!' })
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }

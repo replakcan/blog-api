@@ -15,7 +15,7 @@ exports.authorProfileGet = async (req, res, next) => {
 
     res.json(author)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
@@ -35,7 +35,7 @@ exports.authorPostsPost = async (req, res, next) => {
 
     res.json(newPost)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
@@ -51,7 +51,7 @@ exports.authorPostsGet = async (req, res, next) => {
 
     res.json(posts)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
@@ -67,6 +67,6 @@ exports.authorCommentsGet = async (req, res, next) => {
 
     res.json(comments)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }

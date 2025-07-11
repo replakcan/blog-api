@@ -22,7 +22,7 @@ exports.usersLoginPost = async (req, res, next) => {
 
     res.json({ token })
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
@@ -45,7 +45,7 @@ exports.usersRegisterPost = async (req, res, next) => {
 
     res.status(201).json(newUser)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
 
@@ -70,6 +70,6 @@ exports.usersFindMany = async (req, res, next) => {
 
     res.json(users)
   } catch (error) {
-    return next(error)
+    next(error)
   }
 }
