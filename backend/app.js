@@ -8,7 +8,9 @@ const passport = require('passport')
 const isAuth = require('./auth/isAuth')
 const authorRouter = require('./routes/authorRouter')
 const usersRouter = require('./routes/usersRouter')
+const cors = require('cors')
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
