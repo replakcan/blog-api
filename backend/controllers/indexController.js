@@ -50,6 +50,25 @@ exports.usersRegisterPost = async (req, res, next) => {
   }
 }
 
+exports.verifyCurrentUser = async (req, res, next) => {
+  const { id } = req.user
+
+  try {
+    const currentUser = await prisma.user.findFirstOrThrow({
+      where: {
+        id,
+      },
+      omit: {
+        password: true,
+      },
+    })
+
+    res.json(currentUser)
+  } catch (error) {
+    next(error)
+  }
+}
+
 exports.usersSecretGet = (req, res) => {
   res.json({ message: `Hello ${req.user.username}, you made it to the secret dungeon!` })
 }

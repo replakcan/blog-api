@@ -7,6 +7,8 @@ indexRouter.post('/login', indexController.usersLoginPost)
 
 indexRouter.post('/register', indexController.usersRegisterPost)
 
+indexRouter.get('/verify', isAuth, indexController.verifyCurrentUser)
+
 indexRouter.get('/secret', isAuth, indexController.usersSecretGet)
 
 indexRouter.get('/users', indexController.usersFindMany)
