@@ -8,7 +8,9 @@ const TestContext = createContext({
     age: '',
     username: '',
     email: '',
-    role: ''
+    role: '',
+    posts: [],
+    comments: []
   }
 })
 
