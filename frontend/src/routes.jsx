@@ -30,6 +30,10 @@ const routes = [
             path: 'register',
             element: <RegisterPage />,
           },
+          {
+            path: 'test',
+            element: <ContextTest />,
+          },
         ],
       },
     ],
