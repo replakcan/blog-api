@@ -8,9 +8,9 @@ export default function RootHeader({ handleLogout }) {
   return (
     <header className="root-header">
       <nav>
-        {user ? <HeaderLink to="/" text="Logout" onClick={handleLogout} /> : <HeaderLink to="/login" text="Login" />}
         <HeaderLink to="/home" text="Home" />
         {user && <HeaderLink to="/profile" text="Profile" />}
+        {user ? <HeaderLink to="/" text="Logout" onClick={handleLogout} /> : <HeaderLink to="/login" text="Login" />}
       </nav>
     </header>
   )
