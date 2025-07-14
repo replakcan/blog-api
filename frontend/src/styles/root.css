@@ -1,0 +1,25 @@
+.root > * {
+  padding: 1rem;
+}
+
+.root {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 15% 1fr;
+  grid-template-rows: 15% 1fr;
+}
+
+.root-header {
+  grid-area: 1 / 2 / 2 / -1;
+  background-color: green;
+}
+
+.root-sidebar {
+  grid-area: 1 / 1 / -1 / 2;
+  background-color: yellow;
+}
+
+.root-main {
+  grid-area: 2 / 2 / -1 / -1;
+  background-color: aqua;
+}
