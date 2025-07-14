@@ -23,6 +23,16 @@ export default function RegisterPage() {
     try {
       const res = await axios.post('http://localhost:3000/register', formData)
       console.log('Register success:', res.data)
+
+      setFormData({
+        first_name: '',
+        last_name: '',
+        username: '',
+        email: '',
+        age: '',
+        password: '',
+        role: '',
+      })
     } catch (err) {
       if (err.response) {
         console.error('Server error:', err.response.data)
