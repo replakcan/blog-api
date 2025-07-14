@@ -14,6 +14,17 @@
   background-color: green;
 }
 
+.root-header nav {
+  display: flex;
+  gap: 1rem;
+  color: white;
+}
+
+.root-header nav > * {
+  text-decoration: none;
+  color: white;
+}
+
 .root-sidebar {
   grid-area: 1 / 1 / -1 / 2;
   background-color: yellow;
@@ -22,4 +33,24 @@
 .root-main {
   grid-area: 2 / 2 / -1 / -1;
   background-color: aqua;
+}
+
+a {
+  color: inherit;
+  font-weight: bold;
+  transition: color 0.2s ease-in;
+  text-decoration: none;
+}
+
+a:hover {
+  color: blue;
+}
+
+a.active {
+  background: blue;
+  color: white;
+}
+
+a.pending {
+  color: blue;
 }
