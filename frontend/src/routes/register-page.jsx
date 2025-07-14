@@ -63,7 +63,7 @@ export default function RegisterPage() {
 
       <div>
         <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <input type="email" name="email" value={formData.email} onChange={handleChange} required autoComplete="name" />
       </div>
 
       <div>
@@ -73,7 +73,14 @@ export default function RegisterPage() {
 
       <div>
         <label>Password:</label>
-        <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          autoComplete="current-password"
+        />
       </div>
 
       <div>
