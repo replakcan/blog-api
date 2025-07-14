@@ -58,6 +58,10 @@ exports.verifyCurrentUser = async (req, res, next) => {
       where: {
         id
       },
+      include: {
+        posts: true,
+        comments: true
+      },
       omit: {
         password: true
       }
