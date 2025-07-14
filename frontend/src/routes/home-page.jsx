@@ -1,6 +1,6 @@
-import { Fragment } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { axiosInstance } from '../api/axiosInstance'
+import Card from '../components/card'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -22,10 +22,10 @@ function HomePage() {
     <>
       {feed.map(post => {
         return (
-          <Fragment key={post.id}>
+          <Card key={post.id}>
             <h1>{post.title}</h1>
             <p>{post.text}</p>
-          </Fragment>
+          </Card>
         )
       })}
     </>
