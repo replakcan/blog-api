@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import useLocalStorage from '../hooks/useLocalStorage'
 import { axiosInstance } from '../api/axiosInstance'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   })
-  const [token, setToken] = useLocalStorage('token', null)
+  const { setToken } = useOutletContext()
+  let navigate = useNavigate()
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -21,6 +22,7 @@ export default function LoginPage() {
       const res = await axiosInstance.post('login', formData)
 
       setToken(res.data.token)
+      navigate('/home')
     } catch (err) {
       console.error('Login failed:', err.response?.data || err.message)
     }

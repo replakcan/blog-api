@@ -16,7 +16,7 @@ function Root() {
           <p>sidebar</p>
         </aside>
         <main className="root-main">
-          <Outlet />
+          <Outlet context={{ setToken }} />
         </main>
       </section>
     </TestContext.Provider>
