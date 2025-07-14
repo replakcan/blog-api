@@ -1,13 +1,16 @@
 import '../styles/root.css'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import TestContext from '../test-context'
 import { useEffect, useState } from 'react'
 import { axiosInstance } from '../api/axiosInstance'
+import RootHeader from '../components/root-header'
 import useLocalStorage from '../hooks/useLocalStorage'
 
 function Root() {
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState(null)
   const [token, setToken] = useLocalStorage('token', null)
+  let navigate = useNavigate()
+
   useEffect(() => {
     if (!token) return
 
@@ -17,15 +20,20 @@ function Root() {
       .catch(err => console.log(err))
   }, [token])
 
+  const handleLogout = () => {
+    setToken(null)
+    setCurrentUser(null)
+
+    navigate('/home')
+  }
+
+  console.log('current user: ', currentUser)
+
   return (
     <TestContext.Provider value={{ user: currentUser }}>
       <section className="root">
-        <header className="root-header">
-          <p>header</p>
-        </header>
-        <aside className="root-sidebar">
-          <p>sidebar</p>
-        </aside>
+        <RootHeader user={currentUser} handleLogout={handleLogout} />
+        <aside className="root-sidebar"></aside>
         <main className="root-main">
           <Outlet context={{ setToken }} />
         </main>
