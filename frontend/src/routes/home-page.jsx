@@ -20,7 +20,7 @@ function HomePage() {
 
   return (
     <>
-      {feed.map((post) => {
+      {feed.map(post => {
         return (
           <Fragment key={post.id}>
             <h1>{post.title}</h1>

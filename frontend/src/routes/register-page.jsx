@@ -9,15 +9,15 @@ export default function RegisterPage() {
     email: '',
     age: '',
     password: '',
-    role: '',
+    role: ''
   })
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: name === 'age' ? Number(value) : value }))
+    setFormData(prev => ({ ...prev, [name]: name === 'age' ? Number(value) : value }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     try {
@@ -31,7 +31,7 @@ export default function RegisterPage() {
         email: '',
         age: '',
         password: '',
-        role: '',
+        role: ''
       })
     } catch (err) {
       if (err.response) {

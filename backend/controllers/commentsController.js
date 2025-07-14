@@ -7,8 +7,8 @@ exports.attachCommentToRequestObj = async (req, res, next) => {
   try {
     const comment = await prisma.comment.findUniqueOrThrow({
       where: {
-        id: commentId,
-      },
+        id: commentId
+      }
     })
 
     req.comment = comment
@@ -36,11 +36,11 @@ exports.commentsUpdateById = async (req, res, next) => {
 
     const updatedComment = await prisma.comment.update({
       where: {
-        id: comment.id,
+        id: comment.id
       },
       data: {
-        text,
-      },
+        text
+      }
     })
 
     res.json(updatedComment)
@@ -56,8 +56,8 @@ exports.commentsDeleteById = async (req, res, next) => {
 
     await prisma.comment.delete({
       where: {
-        id: comment.id,
-      },
+        id: comment.id
+      }
     })
   } catch (error) {
     next(error)

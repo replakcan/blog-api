@@ -5,16 +5,16 @@ const jwt = require('jsonwebtoken')
 
 const privateKey = fs.readFileSync(path.resolve(process.env.PRIVATE_KEY_PATH), 'utf8')
 
-const generateToken = (user) => {
+const generateToken = user => {
   const payload = {
     id: user.id,
     username: user.username,
-    role: user.role,
+    role: user.role
   }
 
   return jwt.sign(payload, privateKey, {
     algorithm: 'RS256',
-    expiresIn: '1d',
+    expiresIn: '1d'
   })
 }
 

@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 
 const TestContext = createContext({
-  user: {},
+  user: {}
 })
 
 export default TestContext

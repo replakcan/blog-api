@@ -10,5 +10,5 @@ const isAuthor = (req, res, next) => {
 }
 
 module.exports = {
-  isAuthor,
+  isAuthor
 }

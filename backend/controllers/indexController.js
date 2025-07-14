@@ -9,8 +9,8 @@ exports.usersLoginPost = async (req, res, next) => {
   try {
     const user = await prisma.user.findFirst({
       where: {
-        username,
-      },
+        username
+      }
     })
 
     if (!user) throw new UnauthorizedError('Invalid credentials')
@@ -40,8 +40,8 @@ exports.usersRegisterPost = async (req, res, next) => {
         username,
         email,
         age,
-        password: hashedPassword,
-      },
+        password: hashedPassword
+      }
     })
 
     res.status(201).json(newUser)
@@ -56,11 +56,11 @@ exports.verifyCurrentUser = async (req, res, next) => {
   try {
     const currentUser = await prisma.user.findFirstOrThrow({
       where: {
-        id,
+        id
       },
       omit: {
-        password: true,
-      },
+        password: true
+      }
     })
 
     res.json(currentUser)
@@ -81,11 +81,11 @@ exports.usersFindMany = async (req, res, next) => {
         last_name: true,
         email: true,
         age: true,
-        password: true,
+        password: true
       },
       include: {
-        posts: true,
-      },
+        posts: true
+      }
     })
 
     res.json(users)

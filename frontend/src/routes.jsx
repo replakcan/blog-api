@@ -20,24 +20,24 @@ const routes = [
           {
             path: 'home',
             element: <HomePage />,
-            loader: feedLoader,
+            loader: feedLoader
           },
           {
             path: 'login',
-            element: <LoginPage />,
+            element: <LoginPage />
           },
           {
             path: 'register',
-            element: <RegisterPage />,
+            element: <RegisterPage />
           },
           {
             path: 'test',
-            element: <ContextTest />,
-          },
-        ],
-      },
-    ],
-  },
+            element: <ContextTest />
+          }
+        ]
+      }
+    ]
+  }
 ]
 
 export default routes

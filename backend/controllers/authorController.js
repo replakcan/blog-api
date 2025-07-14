@@ -6,12 +6,12 @@ exports.authorProfileGet = async (req, res, next) => {
   try {
     const author = await prisma.user.findUniqueOrThrow({
       where: {
-        id: authorId,
+        id: authorId
       },
       include: {
         posts: true,
-        comments: true,
-      },
+        comments: true
+      }
     })
 
     res.json(author)
@@ -28,8 +28,8 @@ exports.authorPostsPost = async (req, res, next) => {
       data: {
         title,
         text,
-        userId: user.id,
-      },
+        userId: user.id
+      }
     })
 
     if (!user) throw new NotFoundError('Author not found')
@@ -46,8 +46,8 @@ exports.authorPostsGet = async (req, res, next) => {
   try {
     const posts = await prisma.post.findMany({
       where: {
-        userId: authorId,
-      },
+        userId: authorId
+      }
     })
 
     res.json(posts)
@@ -62,8 +62,8 @@ exports.authorCommentsGet = async (req, res, next) => {
   try {
     const comments = await prisma.comment.findMany({
       where: {
-        userId: authorId,
-      },
+        userId: authorId
+      }
     })
 
     res.json(comments)

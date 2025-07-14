@@ -1,24 +1,24 @@
 import { useState } from 'react'
-import axios from 'axios'
 import useLocalStorage from '../hooks/useLocalStorage'
+import { axiosInstance } from '../api/axiosInstance'
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
     username: '',
-    password: '',
+    password: ''
   })
   const [token, setToken] = useLocalStorage('token', null)
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     try {
-      const res = await axios.post('http://localhost:3000/login', formData)
+      const res = await axiosInstance.post('login', formData)
 
       setToken(res.data.token)
     } catch (err) {

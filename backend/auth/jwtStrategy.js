@@ -10,7 +10,7 @@ const publicKey = fs.readFileSync(path.resolve(process.env.PUBLIC_KEY_PATH), 'ut
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: publicKey,
-  algorithms: ['RS256'],
+  algorithms: ['RS256']
 }
 
 passport.use(
@@ -18,8 +18,8 @@ passport.use(
     try {
       const user = await prisma.user.findFirst({
         where: {
-          id: jwt_payload.id,
-        },
+          id: jwt_payload.id
+        }
       })
 
       if (user) return done(null, user)

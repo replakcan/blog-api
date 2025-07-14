@@ -6,7 +6,7 @@ exports.attachPostToRequestObj = async (req, res, next) => {
 
   try {
     const post = await prisma.post.findUniqueOrThrow({
-      where: { id: postId },
+      where: { id: postId }
     })
 
     req.post = post
@@ -19,7 +19,7 @@ exports.attachPostToRequestObj = async (req, res, next) => {
 exports.postsFindMany = async (req, res, next) => {
   try {
     const posts = await prisma.post.findMany({
-      include: { comments: true },
+      include: { comments: true }
     })
 
     res.json(posts)
@@ -59,7 +59,7 @@ exports.postsUpdateById = async (req, res, next) => {
 
     const updatedPost = await prisma.post.update({
       where: { id: post.id },
-      data: { title, text, userId: user.id },
+      data: { title, text, userId: user.id }
     })
 
     res.json(updatedPost)
@@ -75,7 +75,7 @@ exports.postsDeleteById = async (req, res, next) => {
     if (post.userId != user.id) throw new ForbiddenError('You are not allowed to delete this post')
 
     await prisma.post.delete({
-      where: { id: post.id },
+      where: { id: post.id }
     })
 
     res.json({ message: `post with id ${post.id} is deleted.` })
@@ -90,7 +90,7 @@ exports.createCommentByPostId = async (req, res, next) => {
 
   try {
     const newComment = await prisma.comment.create({
-      data: { text, postId: post.id, userId: user.id },
+      data: { text, postId: post.id, userId: user.id }
     })
 
     res.json(newComment)
@@ -107,7 +107,7 @@ exports.postsPublishById = async (req, res, next) => {
 
     const patchedPost = await prisma.post.update({
       where: { id: post.id },
-      data: { published: true },
+      data: { published: true }
     })
 
     res.json(patchedPost)

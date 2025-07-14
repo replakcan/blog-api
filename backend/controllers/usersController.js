@@ -6,11 +6,11 @@ exports.giveUserAuthorship = async (req, res, next) => {
   try {
     await prisma.user.update({
       where: {
-        id: user.id,
+        id: user.id
       },
       data: {
-        role: 'AUTHOR',
-      },
+        role: 'AUTHOR'
+      }
     })
 
     res.json({ message: 'You are an author now!' })
