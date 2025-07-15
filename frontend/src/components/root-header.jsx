@@ -10,8 +10,15 @@ export default function RootHeader({ handleLogout }) {
       <nav>
         <HeaderLink to="/feed" text="Feed" />
         {user && <HeaderLink to="/profile" text="Profile" />}
-        {user ? <HeaderLink to="/" text="Logout" onClick={handleLogout} /> : <HeaderLink to="/login" text="Login" />}
+        {!user && <HeaderLink className="register-btn" to="/register" text="Register" />}
+        {user ? (
+          <HeaderLink className="logout-btn" to="/" text="Logout" onClick={handleLogout} />
+        ) : (
+          <HeaderLink className="login-btn" to="/login" text="Login" />
+        )}
       </nav>
+
+      {user && <span className='online-user'>{user.username}</span>}
     </header>
   )
 }
