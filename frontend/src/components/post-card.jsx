@@ -74,6 +74,7 @@ export default function PostCard({ post, comments }) {
           </p>
         ))}
       <div className="button-group">
+        <p>{post.updatedAt}</p>
         <button onClick={handleToggleNewComment}>{isVisible.newComment ? 'Cancel' : 'Add new comment'}</button>
         <button onClick={handleToggleComments}>{isVisible.comments ? 'Hide comments' : 'Show comments'}</button>
       </div>
