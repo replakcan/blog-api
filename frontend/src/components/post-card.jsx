@@ -4,7 +4,8 @@ import CommentCard from './comment-card'
 import { axiosInstance } from '../api/axiosInstance'
 import TestContext from '../test-context'
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, comments }) {
+  const [postComments, setPostComments] = useState(comments)
   const { user } = useContext(TestContext)
   const [isVisible, setIsVisible] = useState({ newComment: false, comments: false })
   const [commentData, setCommentData] = useState({
