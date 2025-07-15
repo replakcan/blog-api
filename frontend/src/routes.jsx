@@ -22,7 +22,7 @@ const routes = [
         children: [
           { index: true, element: <Index /> },
           {
-            path: 'home',
+            path: 'feed',
             element: <HomePage />,
             loader: feedLoader
           },
