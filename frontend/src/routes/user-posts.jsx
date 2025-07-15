@@ -4,7 +4,6 @@ import PostCard from '../components/post-card'
 
 export default function UserPosts() {
   const { user } = useContext(TestContext)
-  console.log(user)
 
   const posts = user.posts
 

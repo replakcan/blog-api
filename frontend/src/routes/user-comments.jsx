@@ -4,7 +4,6 @@ import CommentCard from '../components/comment-card'
 
 export default function UserComments() {
   const { user } = useContext(TestContext)
-  console.log(user)
 
   const comments = user.comments
 

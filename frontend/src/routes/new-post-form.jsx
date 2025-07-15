@@ -20,9 +20,7 @@ export default function NewPostForm() {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await axiosInstance.post('author/posts', formData)
-
-      console.log('New post created:', res.data)
+      await axiosInstance.post('author/posts', formData)
 
       setFormData({
         title: '',
