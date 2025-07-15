@@ -28,7 +28,7 @@ export default function NewPostForm() {
         userId: user.id
       })
 
-      navigate('/home')
+      navigate('/profile/posts')
     } catch (err) {
       console.error('Failed to create post:', err.response?.data || err.message)
     }

@@ -22,7 +22,7 @@ export default function LoginPage() {
       const res = await axiosInstance.post('login', formData)
 
       setToken(res.data.token)
-      navigate('/home')
+      navigate('/feed')
     } catch (err) {
       console.error('Login failed:', err.response?.data || err.message)
     }

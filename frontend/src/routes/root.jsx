@@ -24,10 +24,8 @@ function Root() {
     setToken(null)
     setCurrentUser(null)
 
-    navigate('/home')
+    navigate('/feed')
   }
-
-  console.log('current user: ', currentUser)
 
   return (
     <UserContext.Provider value={{ user: currentUser }}>
