@@ -1,37 +1,42 @@
-.root > * {
-  padding: 1rem;
-}
-
 .root {
   display: grid;
   min-height: 100vh;
-  grid-template-columns: 25vh 1fr;
-  grid-template-rows: 15vh 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content 1fr;
 }
 
 .root-header {
   grid-area: 1 / 1 / 2 / -1;
-  background-color: green;
+  background-color: #6b2737;
+  display: flex;
+  padding: 1rem 20%;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  z-index: 1;
 }
 
 .root-header nav {
   display: flex;
   gap: 1rem;
-  color: white;
+  color: e4fde1;
+}
+
+.online-user {
+  color: #e4fde1;
+  margin-left: auto;
+  font-weight: bold;
 }
 
 .root-header nav > * {
   text-decoration: none;
   color: white;
-}
-
-.root-header nav > a:last-child {
-  margin-left: auto;
+  height: min-content;
 }
 
 .root-main {
   grid-area: 2 / 1 / -1 / -1;
-  background-color: aqua;
+  background-color: #e4fde1;
+  padding: 2rem 15%;
 }
 
 a {
@@ -42,14 +47,14 @@ a {
 }
 
 a:hover {
-  color: blue;
+  color: #114b5f;
 }
 
 a.active {
-  background: blue;
+  background: #114b5f;
   color: white;
 }
 
 a.pending {
-  color: blue;
+  color: #114b5f;
 }
