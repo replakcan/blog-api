@@ -10,7 +10,7 @@
 }
 
 .root-header {
-  grid-area: 1 / 2 / 2 / -1;
+  grid-area: 1 / 1 / 2 / -1;
   background-color: green;
 }
 
@@ -29,13 +29,8 @@
   margin-left: auto;
 }
 
-.root-sidebar {
-  grid-area: 1 / 1 / -1 / 2;
-  background-color: yellow;
-}
-
 .root-main {
-  grid-area: 2 / 2 / -1 / -1;
+  grid-area: 2 / 1 / -1 / -1;
   background-color: aqua;
 }
 

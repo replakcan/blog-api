@@ -31,7 +31,6 @@ function Root() {
     <UserContext.Provider value={{ user: currentUser }}>
       <section className="root">
         <RootHeader user={currentUser} handleLogout={handleLogout} />
-        <aside className="root-sidebar"></aside>
         <main className="root-main">
           <Outlet context={{ setToken }} />
         </main>
