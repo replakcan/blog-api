@@ -1,6 +1,9 @@
 import { useLoaderData } from 'react-router-dom'
 import { axiosInstance } from '../api/axiosInstance'
+import PostCard from '../components/post-card'
+import CommentCard from '../components/comment-card'
 import Card from '../components/card'
+import { useState } from 'react'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -20,14 +23,9 @@ function HomePage() {
 
   return (
     <>
-      {feed.map(post => {
-        return (
-          <Card key={post.id}>
-            <h1>{post.title}</h1>
-            <p>{post.text}</p>
-          </Card>
-        )
-      })}
+      {feed.map(post => (
+        <PostCard key={post.id} post={post} />
+      ))}
     </>
   )
 }
