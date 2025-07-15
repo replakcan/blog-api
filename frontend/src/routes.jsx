@@ -10,6 +10,7 @@ import UserProfile from './routes/user-profile'
 import NewPostForm from './routes/new-post-form'
 import UserPosts from './routes/user-posts'
 import UserComments from './routes/user-comments'
+import PostDetails from './routes/post-details'
 
 const routes = [
   {
@@ -37,6 +38,10 @@ const routes = [
           {
             path: 'test',
             element: <ContextTest />
+          },
+          {
+            path: 'posts/:postId',
+            element: <PostDetails />
           },
           {
             path: 'profile',
