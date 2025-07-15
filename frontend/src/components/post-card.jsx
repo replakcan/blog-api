@@ -65,7 +65,14 @@ export default function PostCard({ post, comments }) {
           <button type="submit">Confirm</button>
         </form>
       )}
-      {isVisible.comments && post.comments.map(comment => <CommentCard key={comment.id} comment={comment} />)}
+      {isVisible.comments &&
+        (postComments.length > 0 ? (
+          postComments.map(comment => <CommentCard key={comment.id} comment={comment} />)
+        ) : (
+          <p>
+            <em>No comments have been made yet.</em>
+          </p>
+        ))}
       <div className="button-group">
         <button onClick={handleToggleNewComment}>{isVisible.newComment ? 'Cancel' : 'Add new comment'}</button>
         <button onClick={handleToggleComments}>{isVisible.comments ? 'Hide comments' : 'Show comments'}</button>
