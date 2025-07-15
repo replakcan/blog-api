@@ -5,8 +5,8 @@
 .root {
   display: grid;
   min-height: 100vh;
-  grid-template-columns: 15% 1fr;
-  grid-template-rows: 15% 1fr;
+  grid-template-columns: 25vh 1fr;
+  grid-template-rows: 15vh 1fr;
 }
 
 .root-header {
