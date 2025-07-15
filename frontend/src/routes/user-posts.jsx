@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react'
+import { useContext } from 'react'
 import TestContext from '../test-context'
 import PostCard from '../components/post-card'
 
@@ -17,13 +17,9 @@ export default function UserPosts() {
 
   return (
     <>
-      {posts.map(post => {
-        return (
-          <Fragment key={post.id}>
-            <PostCard post={post} />
-          </Fragment>
-        )
-      })}
+      {posts.map(post => (
+        <PostCard key={post.id} post={post} />
+      ))}
     </>
   )
 }
