@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Card from './card'
 import CommentCard from './comment-card'
 import { axiosInstance } from '../api/axiosInstance'
@@ -11,6 +11,19 @@ export default function PostCard({ post, comments }) {
   const [commentData, setCommentData] = useState({
     text: ''
   })
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axiosInstance.get(`posts/${post.id}/comments`)
+        setPostComments(res.data)
+      } catch (error) {
+        console.error('Failed to fetch comments:', error)
+      }
+    }
+
+    fetchComments()
+  }, [post.id])
 
   const handleToggleComments = () => {
     setIsVisible(prevState => ({ ...prevState, comments: !prevState.comments }))
@@ -26,13 +39,17 @@ export default function PostCard({ post, comments }) {
     setCommentData(prevState => ({ ...prevState, [name]: value }))
   }
 
-  const handleSubmit = async (e, post) => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     try {
       await axiosInstance.post(`posts/${post.id}/comments`, { ...commentData, postId: post.id, userId: user.id })
 
       setCommentData({ text: '' })
+      setIsVisible(prevState => ({ ...prevState, newComment: false }))
+
+      const res = await axiosInstance.get(`posts/${post.id}/comments`)
+      setPostComments(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -43,7 +60,7 @@ export default function PostCard({ post, comments }) {
       <h1>{post.title}</h1>
       <p>{post.text}</p>
       {isVisible.newComment && (
-        <form onSubmit={e => handleSubmit(e, post)}>
+        <form onSubmit={e => handleSubmit(e)}>
           <textarea name="text" value={commentData.text} onChange={handleChange}></textarea>
           <button type="submit">Confirm</button>
         </form>
