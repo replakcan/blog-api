@@ -1,11 +1,11 @@
 import { useContext } from 'react'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 import HeaderLink from '../components/header-link'
 import '../styles/user-profile.css'
 import { Outlet } from 'react-router-dom'
 
 export default function UserProfile() {
-  const { user } = useContext(TestContext)
+  const { user } = useContext(UserContext)
 
   if (!user) {
     return <p>No user data available.</p>

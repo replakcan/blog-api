@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react'
 import { axiosInstance } from '../api/axiosInstance'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 import { useNavigate } from 'react-router-dom'
 
 export default function NewPostForm() {
-  const { user } = useContext(TestContext)
+  const { user } = useContext(UserContext)
   let navigate = useNavigate()
   const [formData, setFormData] = useState({
     title: '',

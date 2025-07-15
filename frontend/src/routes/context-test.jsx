@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 
 export default function ContextTest() {
-  const { username, email } = useContext(TestContext)
+  const { username, email } = useContext(UserContext)
 
   return (
     <>

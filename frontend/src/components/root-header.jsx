@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 import HeaderLink from './header-link'
 
 export default function RootHeader({ handleLogout }) {
-  const { user } = useContext(TestContext)
+  const { user } = useContext(UserContext)
 
   return (
     <header className="root-header">

@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 import PostCard from '../components/post-card'
 
 export default function UserPosts() {
-  const { user } = useContext(TestContext)
+  const { user } = useContext(UserContext)
 
   const posts = user.posts
 

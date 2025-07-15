@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import Card from './card'
 import CommentCard from './comment-card'
 import { axiosInstance } from '../api/axiosInstance'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 
 export default function PostCard({ post, comments }) {
   const [postComments, setPostComments] = useState(comments)
-  const { user } = useContext(TestContext)
+  const { user } = useContext(UserContext)
   const [isVisible, setIsVisible] = useState({ newComment: false, comments: false })
   const [commentData, setCommentData] = useState({
     text: ''

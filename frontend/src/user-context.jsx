@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-const TestContext = createContext({
+const UserContext = createContext({
   user: {
     id: '',
     first_name: '',
@@ -14,4 +14,4 @@ const TestContext = createContext({
   }
 })
 
-export default TestContext
+export default UserContext

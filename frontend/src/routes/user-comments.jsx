@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 import CommentCard from '../components/comment-card'
 
 export default function UserComments() {
-  const { user } = useContext(TestContext)
+  const { user } = useContext(UserContext)
 
   const comments = user.comments
 

@@ -1,6 +1,6 @@
 import '../styles/root.css'
 import { Outlet, useNavigate } from 'react-router-dom'
-import TestContext from '../test-context'
+import UserContext from '../user-context'
 import { useEffect, useState } from 'react'
 import { axiosInstance } from '../api/axiosInstance'
 import RootHeader from '../components/root-header'
@@ -30,7 +30,7 @@ function Root() {
   console.log('current user: ', currentUser)
 
   return (
-    <TestContext.Provider value={{ user: currentUser }}>
+    <UserContext.Provider value={{ user: currentUser }}>
       <section className="root">
         <RootHeader user={currentUser} handleLogout={handleLogout} />
         <aside className="root-sidebar"></aside>
@@ -38,7 +38,7 @@ function Root() {
           <Outlet context={{ setToken }} />
         </main>
       </section>
-    </TestContext.Provider>
+    </UserContext.Provider>
   )
 }
 
