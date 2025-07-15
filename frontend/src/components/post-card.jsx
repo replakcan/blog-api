@@ -3,6 +3,7 @@ import Card from './card'
 import CommentCard from './comment-card'
 import { axiosInstance } from '../api/axiosInstance'
 import UserContext from '../user-context'
+import { MessageCircleDashed, MessageCircle, MessageCirclePlus, MessageCircleOff } from 'lucide-react'
 
 export default function PostCard({ post, comments }) {
   const [postComments, setPostComments] = useState(comments)
@@ -73,10 +74,15 @@ export default function PostCard({ post, comments }) {
             <em>No comments have been made yet.</em>
           </p>
         ))}
+      <p>{post.updatedAt}</p>
       <div className="button-group">
-        <p>{post.updatedAt}</p>
-        <button onClick={handleToggleNewComment}>{isVisible.newComment ? 'Cancel' : 'Add new comment'}</button>
-        <button onClick={handleToggleComments}>{isVisible.comments ? 'Hide comments' : 'Show comments'}</button>
+        <i title="add a comment" onClick={handleToggleNewComment}>
+          {isVisible.newComment ? <MessageCircleOff /> : <MessageCirclePlus />}
+        </i>
+
+        <i title={isVisible.comments ? 'hide comments' : 'show comments'} onClick={handleToggleComments}>
+          {!isVisible.comments ? <MessageCircle /> : <MessageCircleDashed />}
+        </i>
       </div>
     </Card>
   )
