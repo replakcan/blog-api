@@ -1,10 +1,57 @@
+import { useContext, useState } from 'react'
 import Card from './card'
+import CommentCard from './comment-card'
+import { axiosInstance } from '../api/axiosInstance'
+import TestContext from '../test-context'
 
 export default function PostCard({ post }) {
+  const { user } = useContext(TestContext)
+  const [isVisible, setIsVisible] = useState({ newComment: false, comments: false })
+  const [commentData, setCommentData] = useState({
+    text: ''
+  })
+
+  const handleToggleComments = () => {
+    setIsVisible(prevState => ({ ...prevState, comments: !prevState.comments }))
+  }
+
+  const handleToggleNewComment = () => {
+    setIsVisible(prevState => ({ ...prevState, newComment: !prevState.newComment }))
+  }
+
+  const handleChange = e => {
+    const { name, value } = e.target
+
+    setCommentData(prevState => ({ ...prevState, [name]: value }))
+  }
+
+  const handleSubmit = async (e, post) => {
+    e.preventDefault()
+
+    try {
+      await axiosInstance.post(`posts/${post.id}/comments`, { ...commentData, postId: post.id, userId: user.id })
+
+      setCommentData({ text: '' })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Card>
       <h1>{post.title}</h1>
       <p>{post.text}</p>
+      {isVisible.newComment && (
+        <form onSubmit={e => handleSubmit(e, post)}>
+          <textarea name="text" value={commentData.text} onChange={handleChange}></textarea>
+          <button type="submit">Confirm</button>
+        </form>
+      )}
+      {isVisible.comments && post.comments.map(comment => <CommentCard key={comment.id} comment={comment} />)}
+      <div className="button-group">
+        <button onClick={handleToggleNewComment}>{isVisible.newComment ? 'Cancel' : 'Add new comment'}</button>
+        <button onClick={handleToggleComments}>{isVisible.comments ? 'Hide comments' : 'Show comments'}</button>
+      </div>
     </Card>
   )
 }
