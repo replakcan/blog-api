@@ -1,5 +1,9 @@
 import '../styles/card.css'
 
-export default function Card({ children }) {
-  return <div className="card">{children}</div>
+export default function Card({ children, ...rest }) {
+  return (
+    <div {...rest} className="card">
+      {children}
+    </div>
+  )
 }
