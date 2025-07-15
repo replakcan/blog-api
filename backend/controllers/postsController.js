@@ -42,7 +42,11 @@ exports.findManyCommentsByPostId = async (req, res, next) => {
   const { post } = req
 
   try {
-    const comments = post.comments
+    const comments = await prisma.comment.findMany({
+      where: {
+        postId: post.id
+      }
+    })
 
     res.json(comments)
   } catch (error) {
