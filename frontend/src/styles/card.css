@@ -1,14 +1,17 @@
 .card {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
   position: relative;
-  transition: background-color 0.3s ease-in;
+  transition: all 0.3s ease-in;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: rgba(255, 255, 255, 0.822);
+  width: 50%;
+  margin: auto;
+  margin-bottom: 1rem;
 }
 
 .card:hover {
-  background-color: #bdd8cd;
+  background-color: #d9c1e7;
 }
 
 .card:last-child {
@@ -29,4 +32,13 @@
 
 .button-group > * {
   display: inline-block;
+}
+
+.card-user {
+  text-decoration: underline;
+}
+
+.card-user:hover {
+  cursor: pointer;
+  color: #114b5f;
 }
