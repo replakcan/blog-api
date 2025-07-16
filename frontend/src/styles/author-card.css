@@ -1,0 +1,8 @@
+.profile-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-links > * {
+  width: fit-content;
+}

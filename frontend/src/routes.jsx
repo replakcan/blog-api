@@ -11,6 +11,9 @@ import NewPostForm from './routes/new-post-form'
 import UserPosts from './routes/user-posts'
 import UserComments from './routes/user-comments'
 import PostDetails from './routes/post-details'
+import AuthorDetails from './routes/author-details'
+import AuthorPosts from './routes/author-posts'
+import AuthorComments from './routes/author-comments'
 
 const routes = [
   {
@@ -38,6 +41,20 @@ const routes = [
           {
             path: 'test',
             element: <ContextTest />
+          },
+          {
+            path: 'author/:authorId',
+            element: <AuthorDetails />,
+            children: [
+              {
+                path: 'posts',
+                element: <AuthorPosts />
+              },
+              {
+                path: 'comments',
+                element: <AuthorComments />
+              }
+            ]
           },
           {
             path: 'posts/:postId',
