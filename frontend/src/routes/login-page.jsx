@@ -30,6 +30,7 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Please Sign In</h2>
       <div>
         <label>Username:</label>
         <input
