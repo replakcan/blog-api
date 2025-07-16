@@ -4,6 +4,7 @@ import CommentCard from './comment-card'
 import { axiosInstance } from '../api/axiosInstance'
 import UserContext from '../user-context'
 import { MessageCircleDashed, MessageCircle, MessageCirclePlus, MessageCircleOff } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 export default function PostCard({ post, comments }) {
   const [postComments, setPostComments] = useState(comments)
@@ -12,6 +13,8 @@ export default function PostCard({ post, comments }) {
   const [commentData, setCommentData] = useState({
     text: ''
   })
+  const [postUser, setPostUser] = useState()
+  let navigate = useNavigate()
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -23,7 +26,18 @@ export default function PostCard({ post, comments }) {
       }
     }
 
+    const fetchPostUser = async () => {
+      try {
+        const res = await axiosInstance.get(`author/${post.userId}`)
+
+        setPostUser(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     fetchComments()
+    fetchPostUser()
   }, [post.id])
 
   const handleToggleComments = () => {
@@ -38,6 +52,10 @@ export default function PostCard({ post, comments }) {
     const { name, value } = e.target
 
     setCommentData(prevState => ({ ...prevState, [name]: value }))
+  }
+
+  const handleUsernameClick = () => {
+    navigate(`/author/${postUser.id}`)
   }
 
   const handleSubmit = async e => {
@@ -58,6 +76,9 @@ export default function PostCard({ post, comments }) {
 
   return (
     <Card>
+      <div title={`see ${postUser?.username}'s details`} className="card-user" onClick={handleUsernameClick}>
+        @{postUser?.username}
+      </div>
       <h1>{post.title}</h1>
       <p>{post.text}</p>
       {isVisible.newComment && (
