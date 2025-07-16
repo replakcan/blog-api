@@ -46,6 +46,7 @@ export default function RegisterPage() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Register Form</h2>
       <div>
         <label>First Name:</label>
         <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required />
