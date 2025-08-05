@@ -21,7 +21,7 @@ export default function RegisterPage() {
     e.preventDefault()
 
     try {
-      const res = await axiosInstance.post('/register', formData)
+      const res = await axiosInstance.post('register', formData)
       console.log('Register success:', res.data)
 
       setFormData({
