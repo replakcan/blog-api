@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(passport.initialize())
 
 app.use('/users', isAuth, usersRouter)
-app.use('/author', isAuth, authorRouter)
+app.use('/author', authorRouter)
 app.use('/posts', postsRouter)
 app.use('/', indexRouter)
 
