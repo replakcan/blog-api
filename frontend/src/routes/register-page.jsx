@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import { axiosInstance } from '../api/axiosInstance'
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ export default function RegisterPage() {
     e.preventDefault()
 
     try {
-      const res = await axios.post('http://localhost:3000/register', formData)
+      const res = await axiosInstance.post('/register', formData)
       console.log('Register success:', res.data)
 
       setFormData({
