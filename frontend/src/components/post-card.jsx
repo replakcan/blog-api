@@ -38,7 +38,7 @@ export default function PostCard({ post, comments }) {
 
     fetchComments()
     fetchPostUser()
-  }, [post.id])
+  }, [post.id, post.userId])
 
   const handleToggleComments = () => {
     setIsVisible(prevState => ({ ...prevState, comments: !prevState.comments }))
