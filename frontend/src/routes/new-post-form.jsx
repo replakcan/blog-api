@@ -35,7 +35,7 @@ export default function NewPostForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '400px' }}>
+    <form onSubmit={handleSubmit} className="new-post-form">
       <div>
         <label htmlFor="title">Title:</label>
         <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} required />
