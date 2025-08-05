@@ -4,13 +4,13 @@ import { axiosInstance } from '../api/axiosInstance'
 import PostCard from '../components/post-card'
 
 export default function PostDetails() {
-  const [post, setPost] = useState({ title: '' })
-  let params = useParams()
+  const [post, setPost] = useState(null)
+  let { postId } = useParams()
 
   useEffect(() => {
     const fetchPostById = async () => {
       try {
-        const res = await axiosInstance.get(`posts/${params.postId}`)
+        const res = await axiosInstance.get(`posts/${postId}`)
 
         setPost(res.data)
       } catch (error) {
@@ -19,7 +19,9 @@ export default function PostDetails() {
     }
 
     fetchPostById()
-  }, [params.postId])
+  }, [postId])
 
-  return <PostCard post={post} comments={post.comments} />
+  if (!post) return <div>Loading...</div>
+
+  return <PostCard post={post} comments={post?.comments} />
 }
