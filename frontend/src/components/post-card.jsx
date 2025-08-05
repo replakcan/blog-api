@@ -61,6 +61,11 @@ export default function PostCard({ post, comments }) {
   const handleSubmit = async e => {
     e.preventDefault()
 
+    if (!user) {
+      alert('You must login before leaving a comment.')
+      return
+    }
+
     try {
       await axiosInstance.post(`posts/${post.id}/comments`, { ...commentData, postId: post.id, userId: user.id })
 
