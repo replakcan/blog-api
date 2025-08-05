@@ -1,14 +1,14 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Card from './card'
 
 export default function CommentCard({ comment }) {
-  let params = useParams()
+  let location = useLocation()
+
+  const isOnCommentsPage = location.pathname.includes('/comments')
 
   return (
     <Card>
-      <div>
-        <Link to={`/posts/${comment.postId}`}>{params.postId ? '' : 'Go to related post'}</Link>
-      </div>
+      <div>{isOnCommentsPage && <Link to={`/posts/${comment.postId}`}>Go to related post</Link>}</div>
       <p>{comment.text}</p>
     </Card>
   )
