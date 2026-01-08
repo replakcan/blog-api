@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { axiosInstance } from '../api/axiosInstance'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { Link, useNavigate, useOutletContext } from 'react-router-dom'
+import '../styles/login-page.css'
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -29,33 +30,47 @@ export default function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Please Sign In</h2>
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-          autoComplete="name"
-        />
-      </div>
+    <section className="login">
+      <header className="login-header">
+        <p className="login-eyebrow">Access</p>
+        <h2 className="login-title">Sign In</h2>
+        <p className="login-subtitle">Keep it sharp. No frills.</p>
+      </header>
 
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          autoComplete="current-password"
-        />
-      </div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label className="login-field">
+          <span>Username</span>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+            autoComplete="name"
+          />
+        </label>
 
-      <button type="submit">Login</button>
-    </form>
+        <label className="login-field">
+          <span>Password</span>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            autoComplete="current-password"
+          />
+        </label>
+
+        <div className="login-actions">
+          <button className="login-button" type="submit">
+            Login
+          </button>
+          <Link className="login-alt" to="/register">
+            Register Instead
+          </Link>
+        </div>
+      </form>
+    </section>
   )
 }

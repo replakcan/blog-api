@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { axiosInstance } from '../api/axiosInstance'
+import { Link, useNavigate, useOutletContext } from 'react-router-dom'
+import '../styles/register-page.css'
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -11,6 +13,11 @@ export default function RegisterPage() {
     password: '',
     role: ''
   })
+  const [toastMessage, setToastMessage] = useState('')
+  const [isRedirecting, setIsRedirecting] = useState(false)
+  const timeoutRef = useRef(null)
+  const { setToken } = useOutletContext()
+  const navigate = useNavigate()
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -21,8 +28,17 @@ export default function RegisterPage() {
     e.preventDefault()
 
     try {
+      const credentials = { username: formData.username, password: formData.password }
       const res = await axiosInstance.post('register', formData)
       console.log('Register success:', res.data)
+      const registerToken = res.data?.token
+      const tokenToUse = registerToken
+        ? registerToken
+        : (await axiosInstance.post('login', credentials)).data?.token
+
+      if (tokenToUse) {
+        setToken(tokenToUse)
+      }
 
       setFormData({
         first_name: '',
@@ -33,6 +49,12 @@ export default function RegisterPage() {
         password: '',
         role: ''
       })
+
+      setToastMessage('Redirecting to profile in 2 seconds.')
+      setIsRedirecting(true)
+      timeoutRef.current = window.setTimeout(() => {
+        navigate('/profile')
+      }, 2000)
     } catch (err) {
       if (err.response) {
         console.error('Server error:', err.response.data)
@@ -44,54 +66,81 @@ export default function RegisterPage() {
     }
   }
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Register Form</h2>
-      <div>
-        <label>First Name:</label>
-        <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required />
-      </div>
+    <section className="register">
+      {toastMessage && <div className="register-toast">{toastMessage}</div>}
+      <header className="register-header">
+        <p className="register-eyebrow">Create</p>
+        <h2 className="register-title">Register</h2>
+        <p className="register-subtitle">Make it official. Minimal fields, max intent.</p>
+      </header>
 
-      <div>
-        <label>Last Name:</label>
-        <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} required />
-      </div>
+      <form className="register-form" onSubmit={handleSubmit}>
+        <div className="register-grid">
+          <label className="register-field">
+            <span>First name</span>
+            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} required />
+          </label>
 
-      <div>
-        <label>Username:</label>
-        <input type="text" name="username" value={formData.username} onChange={handleChange} required />
-      </div>
+          <label className="register-field">
+            <span>Last name</span>
+            <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} required />
+          </label>
 
-      <div>
-        <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} required autoComplete="name" />
-      </div>
+          <label className="register-field">
+            <span>Username</span>
+            <input type="text" name="username" value={formData.username} onChange={handleChange} required />
+          </label>
 
-      <div>
-        <label>Age:</label>
-        <input type="number" name="age" value={formData.age} onChange={handleChange} required />
-      </div>
+          <label className="register-field">
+            <span>Email</span>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} required autoComplete="name" />
+          </label>
 
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          autoComplete="current-password"
-        />
-      </div>
+          <label className="register-field">
+            <span>Age</span>
+            <input type="number" name="age" value={formData.age} onChange={handleChange} required />
+          </label>
 
-      <div>
-        <select name="role" value={formData.role} onChange={handleChange}>
-          <option value="">Select role</option>
-          <option value="READER">Reader</option>
-          <option value="AUTHOR">Author</option>
-        </select>
-      </div>
-      <button type="submit">Register</button>
-    </form>
+          <label className="register-field">
+            <span>Password</span>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              autoComplete="current-password"
+            />
+          </label>
+
+          <label className="register-field">
+            <span>Role</span>
+            <select name="role" value={formData.role} onChange={handleChange}>
+              <option value="">Select role</option>
+              <option value="READER">Reader</option>
+              <option value="AUTHOR">Author</option>
+            </select>
+          </label>
+        </div>
+
+        <div className="register-actions">
+          <button className="register-button" type="submit" disabled={isRedirecting}>
+            Register
+          </button>
+          <Link className="register-alt" to="/login">
+            Already have an account?
+          </Link>
+        </div>
+      </form>
+    </section>
   )
 }

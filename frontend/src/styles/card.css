@@ -1,13 +1,13 @@
 .card {
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  border: 4px solid var(--border);
+  padding: 1.25rem;
   position: relative;
-  transition: all 0.3s ease-in;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  background-color: rgba(255, 255, 255, 0.822);
-  width: 70%;
-  margin: auto;
-  margin-bottom: 1rem;
+  transition: background-color 0.2s ease-in;
+  box-shadow: 10px 10px 0 var(--shadow);
+  background-color: var(--surface);
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 1rem;
 }
 
 .card .card {
@@ -15,7 +15,7 @@
 }
 
 .card:hover {
-  background-color: #c8c1e7;
+  background-color: var(--surface-2);
 }
 
 .card:last-child {
@@ -27,7 +27,7 @@
   gap: 1rem;
   position: absolute;
   right: 1rem;
-  top: 0.5rem;
+  top: 1rem;
 }
 
 .button-group > *:hover {
@@ -36,18 +36,56 @@
 
 .button-group > * {
   display: inline-block;
+  border: 3px solid var(--border);
+  padding: 0.25rem;
+  background: var(--accent-2);
+  color: var(--on-accent);
 }
 
 .card-user {
   text-decoration: underline;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
 }
 
 .card-user:hover {
   cursor: pointer;
-  color: #114b5f;
+  color: var(--text);
 }
 
-.new-post-form * {
-  border: none;
-  width: 100%;
+
+.card form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.card textarea {
+  border: 3px solid var(--border);
+  padding: 0.6rem;
+  min-height: 110px;
+  resize: vertical;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.card button {
+  border: 3px solid var(--border);
+  background: var(--accent-2);
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.card button:hover {
+  background: var(--text);
+  color: var(--accent-2);
+}
+
+@media (max-width: 700px) {
+  .card {
+    box-shadow: 6px 6px 0 var(--shadow);
+  }
 }

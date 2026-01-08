@@ -15,9 +15,10 @@ form > div {
 }
 
 textarea {
-  background-color: lightblue;
+  background-color: var(--surface-2);
   font-style: italic;
-  border: none;
+  border: 3px solid var(--border);
+  color: var(--text);
 }
 
 form select {
@@ -25,9 +26,9 @@ form select {
 }
 
 form button {
-  background-color: #6b2737;
-  color: white;
-  border: none;
+  background-color: var(--accent-2);
+  color: var(--text);
+  border: 3px solid var(--border);
   cursor: pointer;
   width: min-content;
   margin: auto;

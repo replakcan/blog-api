@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { axiosInstance } from '../api/axiosInstance'
 import UserContext from '../user-context'
 import { useNavigate } from 'react-router-dom'
+import '../styles/new-post-form.css'
 
 export default function NewPostForm() {
   const { user } = useContext(UserContext)
@@ -35,18 +36,28 @@ export default function NewPostForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="new-post-form">
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} required />
-      </div>
+    <section className="new-post">
+      <header className="new-post-header">
+        <p className="new-post-eyebrow">Compose</p>
+        <h3 className="new-post-title">New Post</h3>
+        <p className="new-post-subtitle">Keep it sharp. Short lines, strong takes.</p>
+      </header>
 
-      <div>
-        <label htmlFor="text">Text:</label>
-        <textarea name="text" id="text" value={formData.text} onChange={handleChange} rows="4" required />
-      </div>
+      <form onSubmit={handleSubmit} className="new-post-form">
+        <label className="new-post-field" htmlFor="title">
+          <span>Title</span>
+          <input type="text" name="title" id="title" value={formData.title} onChange={handleChange} required />
+        </label>
 
-      <button type="submit">Create Post</button>
-    </form>
+        <label className="new-post-field" htmlFor="text">
+          <span>Text</span>
+          <textarea name="text" id="text" value={formData.text} onChange={handleChange} rows="6" required />
+        </label>
+
+        <button className="new-post-button" type="submit">
+          Create Post
+        </button>
+      </form>
+    </section>
   )
 }

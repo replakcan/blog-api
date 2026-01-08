@@ -1,75 +1,72 @@
-.user-profile {
+.error-page {
+  max-width: 900px;
   display: grid;
   gap: 1.5rem;
   color: var(--text);
 }
 
-.user-profile-header {
+.error-hero {
   border: 4px solid var(--border);
   background: var(--surface-2);
   padding: 1.5rem;
 }
 
-.user-profile-eyebrow {
+.error-eyebrow {
   margin: 0 0 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   font-size: 0.9rem;
 }
 
-.user-profile-title {
+.error-title {
   margin: 0 0 0.5rem;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.2rem, 5vw, 4rem);
   text-transform: uppercase;
 }
 
-.user-profile-subtitle {
+.error-subtitle {
   margin: 0;
 }
 
-.user-profile-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.error-body {
   border: 4px solid var(--border);
   background: var(--surface);
-  padding: 1rem;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
   box-shadow: 10px 10px 0 var(--shadow);
 }
 
-.user-profile-nav a {
+.error-lede {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.error-detail {
+  margin: 0;
+  padding: 0.85rem;
+  border: 3px solid var(--border);
+  background: var(--accent);
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+}
+
+.error-link {
   border: 3px solid var(--border);
   padding: 0.45rem 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.04rem;
   background: var(--surface-3);
+  width: fit-content;
 }
 
-.user-profile-nav a.active {
+.error-link:hover {
   background: var(--text);
   color: var(--surface-3);
-}
-
-.user-profile-nav a:hover {
-  background: var(--text);
-  color: var(--surface-3);
-}
-
-.user-profile-body {
-  display: grid;
-  gap: 1rem;
-}
-
-.user-profile-empty {
-  border: 4px solid var(--border);
-  background: var(--surface);
-  padding: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
 }
 
 @media (max-width: 700px) {
-  .user-profile-nav {
+  .error-body {
     box-shadow: 6px 6px 0 var(--shadow);
   }
 }
